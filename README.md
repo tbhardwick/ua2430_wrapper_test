@@ -80,9 +80,83 @@ setInterval(() => {
 // ua2430.closeCard(hCard);
 ```
 
-### Complete Example
+### Transmit-Receive Example
 
-See `transmit_ch12.js` for a complete example with proper error handling and cleanup.
+To properly transmit data from one channel and receive it on another (e.g., transmit on channel 12, receive on channel 0), follow this critical sequence:
+
+```javascript
+const path = require('path');
+const ua2430 = require(path.join(__dirname, 'build', 'Release', 'ua2430'));
+
+const XMT_CHAN = 12;  // Transmit channel
+const RCV_CHAN = 0;   // Receive channel
+const TEST_LABEL = 0o201; // Octal label
+const CHCFG429_HIGHSPEED = 0x00000001;
+const SDIALL = 0x0F;
+
+// 1. Open card and core
+const hCard = ua2430.openCardNum(0);
+const hCore = ua2430.openCore(hCard, 0);
+
+// 2. Reset the card
+ua2430.resetCard(hCore);
+
+// 3. Configure BOTH channels to the same speed
+ua2430.config429(CHCFG429_HIGHSPEED, XMT_CHAN, hCore); // Transmit channel
+ua2430.config429(CHCFG429_HIGHSPEED, RCV_CHAN, hCore); // Receive channel
+
+// 4. Create receive filters FIRST
+const defaultFilterAddr = ua2430.filterDefault(0, RCV_CHAN, hCore);
+const rxFilterAddr = ua2430.filterSet(0, TEST_LABEL, SDIALL, RCV_CHAN, hCore);
+
+// 5. Create transmit message
+const txMsgAddr = ua2430.BTI429_MsgCreate(0, hCore);
+const msgData = ua2430.BTI429_FldPutLabel(0, TEST_LABEL);
+ua2430.BTI429_MsgDataWr(msgData, txMsgAddr, hCore);
+
+// 6. Build schedule
+ua2430.buildSchedule(hCore, XMT_CHAN, txMsgAddr, 100, 100);
+
+// 7. Start the card
+ua2430.startCard(hCore);
+
+// 8. Explicitly start both channels
+ua2430.start429(RCV_CHAN, hCore);
+ua2430.start429(XMT_CHAN, hCore);
+
+// 9. Read from receive filter periodically
+setInterval(() => {
+  // Update transmit data
+  const newData = ua2430.BTI429_FldPutLabel(0, TEST_LABEL) | 0x1234;
+  ua2430.BTI429_MsgDataWr(newData, txMsgAddr, hCore);
+  
+  // Read from receive filter
+  const rxData = ua2430.BTI429_MsgDataRd(rxFilterAddr, hCore);
+  console.log(`RX Data: 0x${rxData.toString(16)}`);
+}, 1000);
+
+// 10. Cleanup when done
+// ua2430.stop429(RCV_CHAN, hCore);
+// ua2430.stop429(XMT_CHAN, hCore);
+// ua2430.stopCard(hCore);
+// ua2430.closeCard(hCard);
+```
+
+## Test Scripts
+
+This repository includes several test scripts to demonstrate and validate functionality:
+
+- **transmit_ch12.js**: Basic transmission test on channel 12
+- **transmit_receive_test.js**: Combined transmit and receive test (only transmits properly)
+- **specific_label_test.js**: Tests a single label transmission and reception
+- **fixed_receive_test.js**: Fixed version that properly demonstrates transmit and receive functionality
+- **simplified_monitor_test.js**: Tests transmission and reception without sequential monitor
+- **sequential_monitor_test.js**: Attempts to use sequential monitor functionality (has buffer issues)
+
+To run any script:
+```
+node script_name.js
+```
 
 ## API Reference
 
@@ -108,30 +182,57 @@ See `transmit_ch12.js` for a complete example with proper error handling and cle
 - `BTI429_MsgDataRd(msgAddr, coreHandle)`: Read data from a message
 - `BTI429_FldPutLabel(msgValue, label)`: Set a label in a message word
 
+### Filter Management
+
+- `filterDefault(configVal, chanNum, coreHandle)`: Create default filter for all labels
+- `filterSet(configVal, labelVal, sdimask, chanNum, coreHandle)`: Create filter for specific label
+
 ### Schedule Building
 
 - `buildSchedule(coreHandle, chanNum, msgAddr, minInterval, maxInterval)`: Build a schedule with one message
 - `buildSchedule3(coreHandle, chanNum, msgAddr1, min1, max1, msgAddr2, min2, max2, msgAddr3, min3, max3)`: Build a schedule with three messages
 
-## Important Notes
+## Critical Requirements for Transmit/Receive Functionality
 
-1. **Always reset the card** before configuring channels.
-2. **Always start the card** before starting channels.
-3. **Always build a schedule** before starting transmission.
-4. **Always use proper cleanup** when done:
-   - Stop channels
-   - Stop card
-   - Close card
+Through extensive testing, we've identified these critical requirements for proper transmit/receive operations:
 
-5. **ARINC-429 Labels are octal** - always use the `0o` prefix for octal notation (e.g., `0o201`, not `201`).
+1. **Matching speed settings**: Both transmit and receive channels must use the same speed setting (both HIGH SPEED or both LOW SPEED). Auto-speed detection does not work reliably.
+
+2. **Explicit channel starting**: After calling `startCard()`, you must explicitly start both the receive and transmit channels with `start429()`.
+
+3. **Proper initialization order**:
+   - Configure receive channel first
+   - Set up receive filters
+   - Configure transmit channel
+   - Create and initialize transmit messages
+   - Build schedule
+   - Start card
+   - Start receive channel
+   - Start transmit channel
+
+4. **Physical connection**: Ensure proper physical wiring between the transmit and receive channels.
+
+5. **Label matching**: Ensure the transmit label matches the filter label on the receive side.
 
 ## Troubleshooting
 
 - **No transmission seen on scope**: Make sure you've built a schedule with `buildSchedule()`. This is essential for transmission.
+
+- **Not receiving data**: 
+  - Ensure both channels are configured for the same speed
+  - Explicitly start both channels with `start429()`
+  - Check physical connections
+  - Verify filter labels match transmit labels
+  - Follow the proper initialization order
+
+- **Sequential monitor errors**: The sequential monitor functionality has issues with buffer types in JavaScript. Use the direct message reading approach instead of sequential monitor.
+
+- **High bit set in received data**: Data coming from a receive filter may have the high bit (bit 31) set (e.g., 0x80000081). This is normal and indicates valid received data.
+
 - **Errors opening card**: Make sure the Astronics drivers are installed and the device is connected.
-- **Channel not found**: Make sure you're using the correct channel number (usually 12 for primary output).
-- **No data changes**: Make sure you're correctly updating the data with `BTI429_MsgDataWr()`.
+
+- **Channel not found**: Make sure you're using the correct channel number (usually 12 for primary output, 0 for primary input).
 
 ## Credits
 
-This wrapper was developed using SWIG to interface with Astronics UA2430 hardware. It is based on the vendor's C examples, particularly EXAMP2.C from the BTI429 library. 
+This wrapper was developed using SWIG to interface with Astronics UA2430 hardware. It is based on the vendor's C examples, particularly EXAMP2.C and EXAMP3.C from the BTI429 library. 

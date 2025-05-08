@@ -1,5 +1,45 @@
 #!/usr/bin/env node
 
+/**
+ * UA2430 ARINC-429 Transmit and Receive Test
+ * -----------------------------------------
+ * 
+ * Purpose:
+ * This script demonstrates proper ARINC-429 bidirectional communication using the UA2430 hardware.
+ * It sends data on channel 12 and receives it on channel 0, demonstrating the critical requirements
+ * for successful data reception.
+ * 
+ * Key Features:
+ * - Configures BOTH transmit (ch12) and receive (ch0) channels to the SAME SPEED (HIGH SPEED)
+ * - Creates receive filters FIRST (both default and label-specific filters)
+ * - Creates and configures a transmit message with label 201 (octal)
+ * - Builds a transmission schedule
+ * - EXPLICITLY starts both channels after starting the card
+ * - Monitors both transmitted and received data
+ * - Shows proper cleanup procedure for both channels
+ * 
+ * Critical Requirements Demonstrated:
+ * 1. Matching speed settings (both HIGH SPEED)
+ * 2. Explicit channel starting with start429()
+ * 3. Proper initialization order
+ * 4. Read data through both default and label-specific filters
+ * 
+ * Usage:
+ * node fixed_receive_test.js
+ * 
+ * Expected Output:
+ * - Successfully received data will show high bit set (0x80000081)
+ * - Status will show "DATA RECEIVED! Connection is working."
+ * 
+ * Physical Setup Required:
+ * - Connect channel 12 output to channel 0 input with appropriate ARINC-429 cabling
+ * 
+ * Notes:
+ * - This is the reference implementation for bidirectional ARINC-429 communication
+ * - The receive channel MUST be configured for the same speed as the transmit channel
+ * - Without explicit channel starting, reception will not work
+ */
+
 const path = require('path');
 const ua2430 = require(path.join(__dirname, 'build', 'Release', 'ua2430'));
 

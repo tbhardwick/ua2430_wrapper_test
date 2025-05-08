@@ -144,18 +144,24 @@ setInterval(() => {
 
 ## Test Scripts
 
-This repository includes several test scripts to demonstrate and validate functionality:
+This repository includes two functional test scripts:
 
-- **transmit_ch12.js**: Basic transmission test on channel 12
-- **transmit_receive_test.js**: Combined transmit and receive test (only transmits properly)
-- **specific_label_test.js**: Tests a single label transmission and reception
-- **fixed_receive_test.js**: Fixed version that properly demonstrates transmit and receive functionality
-- **simplified_monitor_test.js**: Tests transmission and reception without sequential monitor
-- **sequential_monitor_test.js**: Attempts to use sequential monitor functionality (has buffer issues)
+- **transmit_ch12.js**: Basic transmission test that demonstrates sending data on channel 12. This is a reliable test to verify your hardware is properly transmitting ARINC-429 data.
+
+- **fixed_receive_test.js**: Comprehensive test that demonstrates both transmit and receive functionality. This script properly configures both channels with matching speed settings and explicitly starts each channel, which is required for successful reception.
+
+Additionally, there is a utility script:
+
+- **check_functions.js**: Lists all available functions in the UA2430 wrapper module.
 
 To run any script:
 ```
 node script_name.js
+```
+
+For example:
+```
+node transmit_ch12.js
 ```
 
 ## API Reference
@@ -225,7 +231,7 @@ Through extensive testing, we've identified these critical requirements for prop
   - Verify filter labels match transmit labels
   - Follow the proper initialization order
 
-- **Sequential monitor errors**: The sequential monitor functionality has issues with buffer types in JavaScript. Use the direct message reading approach instead of sequential monitor.
+- **Sequential monitor not supported**: This JavaScript wrapper does not support the sequential monitor functionality due to buffer type incompatibilities between JavaScript and the C API. Use direct message reading through `BTI429_MsgDataRd()` instead.
 
 - **High bit set in received data**: Data coming from a receive filter may have the high bit (bit 31) set (e.g., 0x80000081). This is normal and indicates valid received data.
 

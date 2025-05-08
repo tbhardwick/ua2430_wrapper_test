@@ -1,5 +1,34 @@
 #!/usr/bin/env node
 
+/**
+ * UA2430 ARINC-429 Transmit Test (Channel 12)
+ * -----------------------------------------
+ * 
+ * Purpose:
+ * This script demonstrates basic ARINC-429 transmission using the UA2430 hardware.
+ * It configures channel 12 for HIGH SPEED transmission and sends incrementing data
+ * values with a fixed label (octal 201).
+ * 
+ * Key Features:
+ * - Configures channel 12 for HIGH SPEED transmission
+ * - Creates a message with label 201 (octal)
+ * - Builds a transmission schedule with 100-200ms intervals
+ * - Updates data values every 200ms while preserving the label
+ * - Runs for 20 seconds and performs proper cleanup
+ * 
+ * Usage:
+ * node transmit_ch12.js
+ * 
+ * Expected Output:
+ * - ARINC-429 data should be visible on an oscilloscope connected to channel 12
+ * - The console will show data values being updated
+ * 
+ * Notes:
+ * - This script is a good baseline test to verify your UA2430 hardware is properly 
+ *   transmitting ARINC-429 data.
+ * - The schedule building step is critical for successful transmission.
+ */
+
 const path = require('path');
 const ua2430 = require(path.join(__dirname, 'build', 'Release', 'ua2430'));
 

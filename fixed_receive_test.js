@@ -41,6 +41,7 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 const ua2430 = require(path.join(__dirname, 'build', 'Release', 'ua2430'));
 
 // Use a single label for simplicity
@@ -56,11 +57,38 @@ const CHCFG429_LOWSPEED = 0x00000000;  // Low speed = 0 (default)
 const MSGCRT429_DEFAULT = 0x00000000;
 const SDIALL = 0x0F;
 
+// Logging configuration
+const LOG_FILE = 'arinc429_receive_log.txt';
+
+// Create or open the log file
+function initLogFile() {
+    const timestamp = new Date().toISOString().replace(/:/g, '-');
+    const header = `ARINC-429 Test Log - Started ${timestamp}\n` +
+                   `TX Channel: ${XMT_CHAN}, RX Channel: ${RCV_CHAN}, Label: ${TEST_LABEL.toString(8)} (octal)\n` +
+                   '=============================================================\n' +
+                   'Timestamp            | Iteration | TX Data     | RX Default  | RX Label    | Status\n' +
+                   '--------------------|-----------|-----------  |-----------  |-------------|------------------\n';
+    
+    fs.writeFileSync(LOG_FILE, header);
+    console.log(`Log file initialized: ${LOG_FILE}`);
+}
+
+// Write data to log file
+function logData(iteration, txData, defaultData, rxData, status) {
+    const timestamp = new Date().toISOString().substring(0, 19);
+    const logEntry = `${timestamp} | ${iteration.toString().padStart(9, ' ')} | 0x${txData.toString(16).padStart(8, '0')} | 0x${defaultData.toString(16).padStart(8, '0')} | 0x${rxData.toString(16).padStart(8, '0')} | ${status}\n`;
+    
+    fs.appendFileSync(LOG_FILE, logEntry);
+}
+
 console.log("\n=============================================");
 console.log("ARINC-429 Fixed Receive Test");
 console.log(`Transmit CH${XMT_CHAN} -> Receive CH${RCV_CHAN}`);
 console.log(`Using Label ${TEST_LABEL.toString(8)} (octal)`);
 console.log("=============================================\n");
+
+// Initialize the log file
+initLogFile();
 
 try {
     // Open card and core
@@ -148,6 +176,7 @@ try {
     console.log(`Transmit channel start result: ${err}`);
     
     console.log('\nBeginning transmit/receive test (30 seconds)...');
+    console.log(`Logging data to ${LOG_FILE}`);
     
     let counter = 0;
     const interval = setInterval(() => {
@@ -161,21 +190,28 @@ try {
         const defaultData = ua2430.BTI429_MsgDataRd(defaultFilterAddr, hCore);
         const rxData = ua2430.BTI429_MsgDataRd(rxFilterAddr, hCore);
         
+        // Determine status
+        const status = (rxData !== 0 || defaultData !== 0) ? 
+                      'DATA RECEIVED! Connection is working.' : 
+                      'No data received';
+        
         console.log(`\nIteration ${counter}:`);
         console.log(`  TX Data: 0x${newData.toString(16).padStart(8, '0')}`);
         console.log(`  RX Default Filter: 0x${defaultData.toString(16).padStart(8, '0')}`);
         console.log(`  RX Label Filter: 0x${rxData.toString(16).padStart(8, '0')}`);
+        console.log(`  Status: ${status}`);
         
-        if (rxData !== 0 || defaultData !== 0) {
-            console.log('  Status: DATA RECEIVED! Connection is working.');
-        } else {
-            console.log('  Status: No data received');
-        }
+        // Log to file
+        logData(counter, newData, defaultData, rxData, status);
+        
     }, 1000);
     
     // Run for 30 seconds
     setTimeout(() => {
         clearInterval(interval);
+        
+        // Log test completion
+        fs.appendFileSync(LOG_FILE, `\nTest completed at ${new Date().toISOString()}\n`);
         
         // Stop both channels explicitly
         console.log('\nStopping channels...');
@@ -188,11 +224,20 @@ try {
         ua2430.closeCard(hCard);
         
         console.log('Test completed');
+        console.log(`Log file saved to ${LOG_FILE}`);
         process.exit(0);
     }, 30000);
     
 } catch (e) {
     console.error('\nError:', e.message);
     console.error('Stack:', e.stack);
+    
+    // Log error to file
+    try {
+        fs.appendFileSync(LOG_FILE, `\nERROR at ${new Date().toISOString()}: ${e.message}\n${e.stack}\n`);
+    } catch (logError) {
+        console.error('Additionally, failed to write to log file:', logError);
+    }
+    
     process.exit(1);
 } 

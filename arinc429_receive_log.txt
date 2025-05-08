@@ -1,0 +1,36 @@
+ARINC-429 Test Log - Started 2025-05-08T16-34-21.036Z
+TX Channel: 12, RX Channel: 0, Label: 201 (octal)
+=============================================================
+Timestamp            | Iteration | TX Data     | RX Default  | RX Label    | Status
+--------------------|-----------|-----------  |-----------  |-------------|------------------
+2025-05-08T16:34:22 |         1 | 0x00000081 | 0x00000000 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:23 |         2 | 0x00000083 | 0x00000000 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:24 |         3 | 0x00000083 | 0x00000083 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:25 |         4 | 0x00000085 | 0x00000083 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:26 |         5 | 0x00000085 | 0x00000085 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:27 |         6 | 0x00000087 | 0x00000085 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:28 |         7 | 0x00000087 | 0x80000087 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:29 |         8 | 0x00000089 | 0x80000087 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:30 |         9 | 0x00000089 | 0x00000089 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:31 |        10 | 0x0000008b | 0x00000089 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:32 |        11 | 0x0000008b | 0x8000008b | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:33 |        12 | 0x0000008d | 0x8000008b | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:34 |        13 | 0x0000008d | 0x8000008d | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:35 |        14 | 0x0000008f | 0x8000008d | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:36 |        15 | 0x0000008f | 0x0000008f | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:37 |        16 | 0x00000091 | 0x0000008f | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:38 |        17 | 0x00000091 | 0x00000091 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:39 |        18 | 0x00000093 | 0x00000091 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:40 |        19 | 0x00000093 | 0x80000093 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:41 |        20 | 0x00000095 | 0x80000093 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:42 |        21 | 0x00000095 | 0x80000095 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:43 |        22 | 0x00000097 | 0x80000095 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:44 |        23 | 0x00000097 | 0x00000097 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:45 |        24 | 0x00000099 | 0x00000097 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:46 |        25 | 0x00000099 | 0x80000099 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:47 |        26 | 0x0000009b | 0x80000099 | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:48 |        27 | 0x0000009b | 0x0000009b | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:49 |        28 | 0x0000009d | 0x0000009b | 0x80000081 | DATA RECEIVED! Connection is working.
+2025-05-08T16:34:50 |        29 | 0x0000009d | 0x0000009d | 0x80000081 | DATA RECEIVED! Connection is working.
+
+Test completed at 2025-05-08T16:34:51.130Z

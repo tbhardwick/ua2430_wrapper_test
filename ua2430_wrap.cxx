@@ -1335,13 +1335,17 @@ fail: ;
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_char swig_types[0]
-#define SWIGTYPE_p_int swig_types[1]
-#define SWIGTYPE_p_p_void swig_types[2]
-#define SWIGTYPE_p_unsigned_long swig_types[3]
-#define SWIGTYPE_p_void swig_types[4]
-static swig_type_info *swig_types[6];
-static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
+#define SWIGTYPE_p_SEQFINDINFO swig_types[0]
+#define SWIGTYPE_p_SEQRECORD429 swig_types[1]
+#define SWIGTYPE_p_char swig_types[2]
+#define SWIGTYPE_p_int swig_types[3]
+#define SWIGTYPE_p_p_SEQRECORD429 swig_types[4]
+#define SWIGTYPE_p_p_void swig_types[5]
+#define SWIGTYPE_p_unsigned_long swig_types[6]
+#define SWIGTYPE_p_unsigned_short swig_types[7]
+#define SWIGTYPE_p_void swig_types[8]
+static swig_type_info *swig_types[10];
+static swig_module_info swig_module = {swig_types, 9, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1480,6 +1484,12 @@ int buildSchedule3(void *coreHandle, int channum,
     maxarray[2] = max3;
     
     return BTI429_SchedBuild(3, msgarray, minarray, maxarray, channum, (HCORE)coreHandle);
+}
+unsigned long filterDefault(unsigned long config, int channum, void *coreHandle) {
+    return BTI429_FilterDefault(config, channum, (HCORE)coreHandle);
+}
+unsigned long filterSet(unsigned long config, int labelval, int sdimask, int channum, void *coreHandle) {
+    return BTI429_FilterSet(config, labelval, sdimask, channum, (HCORE)coreHandle);
 }
 
 
@@ -1662,9 +1672,18 @@ SWIG_AsVal_unsigned_SS_short (SWIGV8_VALUE obj, unsigned short *val)
 }
 
 
+SWIGINTERNINLINE SWIGV8_VALUE
+SWIG_From_unsigned_SS_short  (unsigned short value)
+{    
+  return SWIG_From_unsigned_SS_long  (value);
+}
+
+
 #define SWIGV8_INIT ua2430_initialize
 
 
+SWIGV8_ClientData _exports_SEQFINDINFO_clientData;
+SWIGV8_ClientData _exports_SEQRECORD429_clientData;
 
 
 static SwigV8ReturnValue _wrap_openCard(const SwigV8Arguments &args) {
@@ -2151,6 +2170,734 @@ static SwigV8ReturnValue _wrap_buildSchedule3(const SwigV8Arguments &args) {
   goto fail;
 fail:
   SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_filterDefault(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned long arg1 ;
+  int arg2 ;
+  void *arg3 = (void *) 0 ;
+  unsigned long val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 ;
+  unsigned long result;
+  
+  if(args.Length() != 3) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_filterDefault.");
+  
+  ecode1 = SWIG_AsVal_unsigned_SS_long(args[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "filterDefault" "', argument " "1"" of type '" "unsigned long""'");
+  } 
+  arg1 = static_cast< unsigned long >(val1);
+  ecode2 = SWIG_AsVal_int(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "filterDefault" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(args[2],SWIG_as_voidptrptr(&arg3), 0, 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "filterDefault" "', argument " "3"" of type '" "void *""'"); 
+  }
+  result = (unsigned long)filterDefault(arg1,arg2,arg3);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_filterSet(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned long arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  void *arg5 = (void *) 0 ;
+  unsigned long val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 ;
+  unsigned long result;
+  
+  if(args.Length() != 5) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_filterSet.");
+  
+  ecode1 = SWIG_AsVal_unsigned_SS_long(args[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "filterSet" "', argument " "1"" of type '" "unsigned long""'");
+  } 
+  arg1 = static_cast< unsigned long >(val1);
+  ecode2 = SWIG_AsVal_int(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "filterSet" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(args[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "filterSet" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(args[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "filterSet" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  res5 = SWIG_ConvertPtr(args[4],SWIG_as_voidptrptr(&arg5), 0, 0);
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "filterSet" "', argument " "5"" of type '" "void *""'"); 
+  }
+  result = (unsigned long)filterSet(arg1,arg2,arg3,arg4,arg5);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static void _wrap_SEQFINDINFO_pRecFirst_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQFINDINFO *arg1 = (SEQFINDINFO *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQFINDINFO_pRecFirst_set" "', argument " "1"" of type '" "SEQFINDINFO *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQFINDINFO * >(argp1);
+  res2 = SWIG_ConvertPtr(value, &argp2,SWIGTYPE_p_unsigned_short, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SEQFINDINFO_pRecFirst_set" "', argument " "2"" of type '" "unsigned short *""'"); 
+  }
+  arg2 = reinterpret_cast< unsigned short * >(argp2);
+  if (arg1) (arg1)->pRecFirst = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQFINDINFO_pRecFirst_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQFINDINFO *arg1 = (SEQFINDINFO *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short *result = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQFINDINFO_pRecFirst_get" "', argument " "1"" of type '" "SEQFINDINFO *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQFINDINFO * >(argp1);
+  result = (unsigned short *) ((arg1)->pRecFirst);
+  jsresult = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_unsigned_short, 0 |  0 );
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQFINDINFO_pRecNext_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQFINDINFO *arg1 = (SEQFINDINFO *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQFINDINFO_pRecNext_set" "', argument " "1"" of type '" "SEQFINDINFO *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQFINDINFO * >(argp1);
+  res2 = SWIG_ConvertPtr(value, &argp2,SWIGTYPE_p_unsigned_short, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SEQFINDINFO_pRecNext_set" "', argument " "2"" of type '" "unsigned short *""'"); 
+  }
+  arg2 = reinterpret_cast< unsigned short * >(argp2);
+  if (arg1) (arg1)->pRecNext = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQFINDINFO_pRecNext_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQFINDINFO *arg1 = (SEQFINDINFO *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short *result = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQFINDINFO_pRecNext_get" "', argument " "1"" of type '" "SEQFINDINFO *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQFINDINFO * >(argp1);
+  result = (unsigned short *) ((arg1)->pRecNext);
+  jsresult = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_unsigned_short, 0 |  0 );
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQFINDINFO_pRecLast_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQFINDINFO *arg1 = (SEQFINDINFO *) 0 ;
+  unsigned short *arg2 = (unsigned short *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQFINDINFO_pRecLast_set" "', argument " "1"" of type '" "SEQFINDINFO *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQFINDINFO * >(argp1);
+  res2 = SWIG_ConvertPtr(value, &argp2,SWIGTYPE_p_unsigned_short, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SEQFINDINFO_pRecLast_set" "', argument " "2"" of type '" "unsigned short *""'"); 
+  }
+  arg2 = reinterpret_cast< unsigned short * >(argp2);
+  if (arg1) (arg1)->pRecLast = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQFINDINFO_pRecLast_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQFINDINFO *arg1 = (SEQFINDINFO *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short *result = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQFINDINFO_pRecLast_get" "', argument " "1"" of type '" "SEQFINDINFO *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQFINDINFO * >(argp1);
+  result = (unsigned short *) ((arg1)->pRecLast);
+  jsresult = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_unsigned_short, 0 |  0 );
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static SwigV8ReturnValue _wrap_new_SEQFINDINFO(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_OBJECT self = args.Holder();
+  SEQFINDINFO *result;
+  if(self->InternalFieldCount() < 1) SWIG_exception_fail(SWIG_ERROR, "Illegal call of constructor _wrap_new_SEQFINDINFO.");
+  if(args.Length() != 0) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_new_SEQFINDINFO.");
+  result = (SEQFINDINFO *)new SEQFINDINFO();
+  
+  
+  
+  SWIGV8_SetPrivateData(self, result, SWIGTYPE_p_SEQFINDINFO, SWIG_POINTER_OWN);
+  SWIGV8_RETURN(self);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static void _wrap_delete_SEQFINDINFO(const v8::WeakCallbackInfo<SWIGV8_Proxy> &data) {
+  SWIGV8_Proxy *proxy = data.GetParameter();
+  
+  if(proxy->swigCMemOwn && proxy->swigCObject) {
+    SEQFINDINFO * arg1 = (SEQFINDINFO *)proxy->swigCObject;
+    delete arg1;
+  }
+  delete proxy;
+}
+
+
+static void _wrap_SEQRECORD429_type_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned short arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_type_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_short(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_type_set" "', argument " "2"" of type '" "unsigned short""'");
+  } 
+  arg2 = static_cast< unsigned short >(val2);
+  if (arg1) (arg1)->type = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_type_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_type_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned short) ((arg1)->type);
+  jsresult = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQRECORD429_count_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned short arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_count_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_short(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_count_set" "', argument " "2"" of type '" "unsigned short""'");
+  } 
+  arg2 = static_cast< unsigned short >(val2);
+  if (arg1) (arg1)->count = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_count_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_count_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned short) ((arg1)->count);
+  jsresult = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQRECORD429_timestamp_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned long arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_timestamp_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_long(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_timestamp_set" "', argument " "2"" of type '" "unsigned long""'");
+  } 
+  arg2 = static_cast< unsigned long >(val2);
+  if (arg1) (arg1)->timestamp = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_timestamp_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_timestamp_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned long) ((arg1)->timestamp);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQRECORD429_activity_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned short arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_activity_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_short(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_activity_set" "', argument " "2"" of type '" "unsigned short""'");
+  } 
+  arg2 = static_cast< unsigned short >(val2);
+  if (arg1) (arg1)->activity = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_activity_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_activity_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned short) ((arg1)->activity);
+  jsresult = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQRECORD429_decgap_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned short arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_decgap_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_short(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_decgap_set" "', argument " "2"" of type '" "unsigned short""'");
+  } 
+  arg2 = static_cast< unsigned short >(val2);
+  if (arg1) (arg1)->decgap = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_decgap_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_decgap_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned short) ((arg1)->decgap);
+  jsresult = SWIG_From_unsigned_SS_short(static_cast< unsigned short >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQRECORD429_data_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned long arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_data_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_long(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_data_set" "', argument " "2"" of type '" "unsigned long""'");
+  } 
+  arg2 = static_cast< unsigned long >(val2);
+  if (arg1) (arg1)->data = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_data_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_data_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned long) ((arg1)->data);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static void _wrap_SEQRECORD429_timestamph_set(v8::Local<v8::Name> property, v8::Local<v8::Value> value, const SwigV8PropertyCallbackInfoVoid &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  unsigned long arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long val2 ;
+  int ecode2 = 0 ;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_timestamph_set" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_long(value, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SEQRECORD429_timestamph_set" "', argument " "2"" of type '" "unsigned long""'");
+  } 
+  arg2 = static_cast< unsigned long >(val2);
+  if (arg1) (arg1)->timestamph = arg2;
+  
+  
+  
+  goto fail;
+fail:
+  return;
+}
+
+
+static SwigV8ReturnValue _wrap_SEQRECORD429_timestamph_get(v8::Local<v8::Name> property, const SwigV8PropertyCallbackInfo &info) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  SEQRECORD429 *arg1 = (SEQRECORD429 *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long result;
+  
+  res1 = SWIG_ConvertPtr(info.Holder(), &argp1,SWIGTYPE_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SEQRECORD429_timestamph_get" "', argument " "1"" of type '" "SEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< SEQRECORD429 * >(argp1);
+  result = (unsigned long) ((arg1)->timestamph);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  SWIGV8_RETURN_INFO(jsresult, info);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN_INFO(SWIGV8_UNDEFINED(), info);
+}
+
+
+static SwigV8ReturnValue _wrap_new_SEQRECORD429(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_OBJECT self = args.Holder();
+  SEQRECORD429 *result;
+  if(self->InternalFieldCount() < 1) SWIG_exception_fail(SWIG_ERROR, "Illegal call of constructor _wrap_new_SEQRECORD429.");
+  if(args.Length() != 0) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_new_SEQRECORD429.");
+  result = (SEQRECORD429 *)new SEQRECORD429();
+  
+  
+  
+  SWIGV8_SetPrivateData(self, result, SWIGTYPE_p_SEQRECORD429, SWIG_POINTER_OWN);
+  SWIGV8_RETURN(self);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static void _wrap_delete_SEQRECORD429(const v8::WeakCallbackInfo<SWIGV8_Proxy> &data) {
+  SWIGV8_Proxy *proxy = data.GetParameter();
+  
+  if(proxy->swigCMemOwn && proxy->swigCObject) {
+    SEQRECORD429 * arg1 = (SEQRECORD429 *)proxy->swigCObject;
+    delete arg1;
+  }
+  delete proxy;
 }
 
 
@@ -2810,33 +3557,418 @@ fail:
 }
 
 
+static SwigV8ReturnValue _wrap_BTI429_BNRPutMant(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned long arg1 ;
+  unsigned long arg2 ;
+  unsigned short arg3 ;
+  unsigned short arg4 ;
+  unsigned long val1 ;
+  int ecode1 = 0 ;
+  unsigned long val2 ;
+  int ecode2 = 0 ;
+  unsigned short val3 ;
+  int ecode3 = 0 ;
+  unsigned short val4 ;
+  int ecode4 = 0 ;
+  unsigned long result;
+  
+  if(args.Length() != 4) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTI429_BNRPutMant.");
+  
+  ecode1 = SWIG_AsVal_unsigned_SS_long(args[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "BTI429_BNRPutMant" "', argument " "1"" of type '" "unsigned long""'");
+  } 
+  arg1 = static_cast< unsigned long >(val1);
+  ecode2 = SWIG_AsVal_unsigned_SS_long(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BTI429_BNRPutMant" "', argument " "2"" of type '" "unsigned long""'");
+  } 
+  arg2 = static_cast< unsigned long >(val2);
+  ecode3 = SWIG_AsVal_unsigned_SS_short(args[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BTI429_BNRPutMant" "', argument " "3"" of type '" "unsigned short""'");
+  } 
+  arg3 = static_cast< unsigned short >(val3);
+  ecode4 = SWIG_AsVal_unsigned_SS_short(args[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BTI429_BNRPutMant" "', argument " "4"" of type '" "unsigned short""'");
+  } 
+  arg4 = static_cast< unsigned short >(val4);
+  result = (unsigned long)BTI429_BNRPutMant(arg1,arg2,arg3,arg4);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTI429_FilterDefault(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned long arg1 ;
+  int arg2 ;
+  HCORE arg3 = (HCORE) 0 ;
+  unsigned long val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 ;
+  unsigned long result;
+  
+  if(args.Length() != 3) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTI429_FilterDefault.");
+  
+  ecode1 = SWIG_AsVal_unsigned_SS_long(args[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "BTI429_FilterDefault" "', argument " "1"" of type '" "unsigned long""'");
+  } 
+  arg1 = static_cast< unsigned long >(val1);
+  ecode2 = SWIG_AsVal_int(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BTI429_FilterDefault" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(args[2],SWIG_as_voidptrptr(&arg3), 0, 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BTI429_FilterDefault" "', argument " "3"" of type '" "HCORE""'"); 
+  }
+  result = (unsigned long)BTI429_FilterDefault(arg1,arg2,arg3);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTI429_FilterSet(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned long arg1 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  HCORE arg5 = (HCORE) 0 ;
+  unsigned long val1 ;
+  int ecode1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 ;
+  unsigned long result;
+  
+  if(args.Length() != 5) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTI429_FilterSet.");
+  
+  ecode1 = SWIG_AsVal_unsigned_SS_long(args[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "BTI429_FilterSet" "', argument " "1"" of type '" "unsigned long""'");
+  } 
+  arg1 = static_cast< unsigned long >(val1);
+  ecode2 = SWIG_AsVal_int(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BTI429_FilterSet" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(args[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "BTI429_FilterSet" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(args[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "BTI429_FilterSet" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  res5 = SWIG_ConvertPtr(args[4],SWIG_as_voidptrptr(&arg5), 0, 0);
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "BTI429_FilterSet" "', argument " "5"" of type '" "HCORE""'"); 
+  }
+  result = (unsigned long)BTI429_FilterSet(arg1,arg2,arg3,arg4,arg5);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTICard_SeqConfig(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned long arg1 ;
+  HCORE arg2 = (HCORE) 0 ;
+  unsigned long val1 ;
+  int ecode1 = 0 ;
+  int res2 ;
+  int result;
+  
+  if(args.Length() != 2) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTICard_SeqConfig.");
+  
+  ecode1 = SWIG_AsVal_unsigned_SS_long(args[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "BTICard_SeqConfig" "', argument " "1"" of type '" "unsigned long""'");
+  } 
+  arg1 = static_cast< unsigned long >(val1);
+  res2 = SWIG_ConvertPtr(args[1],SWIG_as_voidptrptr(&arg2), 0, 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BTICard_SeqConfig" "', argument " "2"" of type '" "HCORE""'"); 
+  }
+  result = (int)BTICard_SeqConfig(arg1,arg2);
+  jsresult = SWIG_From_int(static_cast< int >(result));
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTICard_SeqBlkRd(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned short *arg1 = (unsigned short *) 0 ;
+  unsigned long arg2 ;
+  unsigned long *arg3 = (unsigned long *) 0 ;
+  HCORE arg4 = (HCORE) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  int res4 ;
+  unsigned long result;
+  
+  if(args.Length() != 4) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTICard_SeqBlkRd.");
+  
+  res1 = SWIG_ConvertPtr(args[0], &argp1,SWIGTYPE_p_unsigned_short, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BTICard_SeqBlkRd" "', argument " "1"" of type '" "unsigned short *""'"); 
+  }
+  arg1 = reinterpret_cast< unsigned short * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_long(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BTICard_SeqBlkRd" "', argument " "2"" of type '" "unsigned long""'");
+  } 
+  arg2 = static_cast< unsigned long >(val2);
+  res3 = SWIG_ConvertPtr(args[2], &argp3,SWIGTYPE_p_unsigned_long, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BTICard_SeqBlkRd" "', argument " "3"" of type '" "unsigned long *""'"); 
+  }
+  arg3 = reinterpret_cast< unsigned long * >(argp3);
+  res4 = SWIG_ConvertPtr(args[3],SWIG_as_voidptrptr(&arg4), 0, 0);
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "BTICard_SeqBlkRd" "', argument " "4"" of type '" "HCORE""'"); 
+  }
+  result = (unsigned long)BTICard_SeqBlkRd(arg1,arg2,arg3,arg4);
+  jsresult = SWIG_From_unsigned_SS_long(static_cast< unsigned long >(result));
+  
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTICard_SeqFindInit(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned short *arg1 = (unsigned short *) 0 ;
+  unsigned long arg2 ;
+  LPSEQFINDINFO arg3 = (LPSEQFINDINFO) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned long val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  int result;
+  
+  if(args.Length() != 3) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTICard_SeqFindInit.");
+  
+  res1 = SWIG_ConvertPtr(args[0], &argp1,SWIGTYPE_p_unsigned_short, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BTICard_SeqFindInit" "', argument " "1"" of type '" "unsigned short *""'"); 
+  }
+  arg1 = reinterpret_cast< unsigned short * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_long(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BTICard_SeqFindInit" "', argument " "2"" of type '" "unsigned long""'");
+  } 
+  arg2 = static_cast< unsigned long >(val2);
+  res3 = SWIG_ConvertPtr(args[2], &argp3,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BTICard_SeqFindInit" "', argument " "3"" of type '" "LPSEQFINDINFO""'"); 
+  }
+  arg3 = reinterpret_cast< LPSEQFINDINFO >(argp3);
+  result = (int)BTICard_SeqFindInit(arg1,arg2,arg3);
+  jsresult = SWIG_From_int(static_cast< int >(result));
+  
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTICard_SeqFindNext429(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  LPSEQRECORD429 *arg1 = (LPSEQRECORD429 *) 0 ;
+  LPSEQFINDINFO arg2 = (LPSEQFINDINFO) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  int result;
+  
+  if(args.Length() != 2) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTICard_SeqFindNext429.");
+  
+  res1 = SWIG_ConvertPtr(args[0], &argp1,SWIGTYPE_p_p_SEQRECORD429, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BTICard_SeqFindNext429" "', argument " "1"" of type '" "LPSEQRECORD429 *""'"); 
+  }
+  arg1 = reinterpret_cast< LPSEQRECORD429 * >(argp1);
+  res2 = SWIG_ConvertPtr(args[1], &argp2,SWIGTYPE_p_SEQFINDINFO, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BTICard_SeqFindNext429" "', argument " "2"" of type '" "LPSEQFINDINFO""'"); 
+  }
+  arg2 = reinterpret_cast< LPSEQFINDINFO >(argp2);
+  result = (int)BTICard_SeqFindNext429(arg1,arg2);
+  jsresult = SWIG_From_int(static_cast< int >(result));
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
+static SwigV8ReturnValue _wrap_BTICard_SeqFindCheckVersion(const SwigV8Arguments &args) {
+  SWIGV8_HANDLESCOPE();
+  
+  SWIGV8_VALUE jsresult;
+  unsigned short *arg1 = (unsigned short *) 0 ;
+  unsigned short arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned short val2 ;
+  int ecode2 = 0 ;
+  int result;
+  
+  if(args.Length() != 2) SWIG_exception_fail(SWIG_ERROR, "Illegal number of arguments for _wrap_BTICard_SeqFindCheckVersion.");
+  
+  res1 = SWIG_ConvertPtr(args[0], &argp1,SWIGTYPE_p_unsigned_short, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BTICard_SeqFindCheckVersion" "', argument " "1"" of type '" "unsigned short *""'"); 
+  }
+  arg1 = reinterpret_cast< unsigned short * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_short(args[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "BTICard_SeqFindCheckVersion" "', argument " "2"" of type '" "unsigned short""'");
+  } 
+  arg2 = static_cast< unsigned short >(val2);
+  result = (int)BTICard_SeqFindCheckVersion(arg1,arg2);
+  jsresult = SWIG_From_int(static_cast< int >(result));
+  
+  
+  
+  SWIGV8_RETURN(jsresult);
+  
+  goto fail;
+fail:
+  SWIGV8_RETURN(SWIGV8_UNDEFINED());
+}
+
+
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static swig_type_info _swigt__p_SEQFINDINFO = {"_p_SEQFINDINFO", "LPSEQFINDINFO|p_SEQFINDINFO|SEQFINDINFO *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_SEQRECORD429 = {"_p_SEQRECORD429", "SEQRECORD429 *|p_SEQRECORD429", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_p_SEQRECORD429 = {"_p_p_SEQRECORD429", "LPSEQRECORD429 *|SEQRECORD429 **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_void = {"_p_p_void", "HCARD *|HCORE *|void **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_unsigned_long = {"_p_unsigned_long", "unsigned long *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_unsigned_short = {"_p_unsigned_short", "unsigned short *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_void = {"_p_void", "void *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_SEQFINDINFO,
+  &_swigt__p_SEQRECORD429,
   &_swigt__p_char,
   &_swigt__p_int,
+  &_swigt__p_p_SEQRECORD429,
   &_swigt__p_p_void,
   &_swigt__p_unsigned_long,
+  &_swigt__p_unsigned_short,
   &_swigt__p_void,
 };
 
+static swig_cast_info _swigc__p_SEQFINDINFO[] = {  {&_swigt__p_SEQFINDINFO, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_SEQRECORD429[] = {  {&_swigt__p_SEQRECORD429, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_p_SEQRECORD429[] = {  {&_swigt__p_p_SEQRECORD429, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_void[] = {  {&_swigt__p_p_void, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_unsigned_long[] = {  {&_swigt__p_unsigned_long, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_unsigned_short[] = {  {&_swigt__p_unsigned_short, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_void[] = {  {&_swigt__p_void, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_SEQFINDINFO,
+  _swigc__p_SEQRECORD429,
   _swigc__p_char,
   _swigc__p_int,
+  _swigc__p_p_SEQRECORD429,
   _swigc__p_p_void,
   _swigc__p_unsigned_long,
+  _swigc__p_unsigned_short,
   _swigc__p_void,
 };
 
@@ -3147,16 +4279,60 @@ void SWIGV8_INIT (SWIGV8_OBJECT exports_obj, SWIGV8_VALUE /*module*/, v8::Local<
   
 
   /* create class templates */
-  
+  /* Name: _exports_SEQFINDINFO, Type: p_SEQFINDINFO, Dtor: _wrap_delete_SEQFINDINFO */
+SWIGV8_FUNCTION_TEMPLATE _exports_SEQFINDINFO_class = SWIGV8_CreateClassTemplate("_exports_SEQFINDINFO");
+SWIGV8_SET_CLASS_TEMPL(_exports_SEQFINDINFO_clientData.class_templ, _exports_SEQFINDINFO_class);
+_exports_SEQFINDINFO_clientData.dtor = _wrap_delete_SEQFINDINFO;
+if (SWIGTYPE_p_SEQFINDINFO->clientdata == 0) {
+  SWIGTYPE_p_SEQFINDINFO->clientdata = &_exports_SEQFINDINFO_clientData;
+}
+/* Name: _exports_SEQRECORD429, Type: p_SEQRECORD429, Dtor: _wrap_delete_SEQRECORD429 */
+SWIGV8_FUNCTION_TEMPLATE _exports_SEQRECORD429_class = SWIGV8_CreateClassTemplate("_exports_SEQRECORD429");
+SWIGV8_SET_CLASS_TEMPL(_exports_SEQRECORD429_clientData.class_templ, _exports_SEQRECORD429_class);
+_exports_SEQRECORD429_clientData.dtor = _wrap_delete_SEQRECORD429;
+if (SWIGTYPE_p_SEQRECORD429->clientdata == 0) {
+  SWIGTYPE_p_SEQRECORD429->clientdata = &_exports_SEQRECORD429_clientData;
+}
+
 
   /* register wrapper functions */
-  
+  SWIGV8_AddMemberVariable(_exports_SEQFINDINFO_class, "pRecFirst", _wrap_SEQFINDINFO_pRecFirst_get, _wrap_SEQFINDINFO_pRecFirst_set);
+SWIGV8_AddMemberVariable(_exports_SEQFINDINFO_class, "pRecNext", _wrap_SEQFINDINFO_pRecNext_get, _wrap_SEQFINDINFO_pRecNext_set);
+SWIGV8_AddMemberVariable(_exports_SEQFINDINFO_class, "pRecLast", _wrap_SEQFINDINFO_pRecLast_get, _wrap_SEQFINDINFO_pRecLast_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "type", _wrap_SEQRECORD429_type_get, _wrap_SEQRECORD429_type_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "count", _wrap_SEQRECORD429_count_get, _wrap_SEQRECORD429_count_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "timestamp", _wrap_SEQRECORD429_timestamp_get, _wrap_SEQRECORD429_timestamp_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "activity", _wrap_SEQRECORD429_activity_get, _wrap_SEQRECORD429_activity_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "decgap", _wrap_SEQRECORD429_decgap_get, _wrap_SEQRECORD429_decgap_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "data", _wrap_SEQRECORD429_data_get, _wrap_SEQRECORD429_data_set);
+SWIGV8_AddMemberVariable(_exports_SEQRECORD429_class, "timestamph", _wrap_SEQRECORD429_timestamph_get, _wrap_SEQRECORD429_timestamph_set);
+
 
   /* setup inheritances */
   
 
   /* class instances */
-  
+  /* Class: SEQFINDINFO (_exports_SEQFINDINFO) */
+SWIGV8_FUNCTION_TEMPLATE _exports_SEQFINDINFO_class_0 = SWIGV8_CreateClassTemplate("SEQFINDINFO");
+_exports_SEQFINDINFO_class_0->SetCallHandler(_wrap_new_SEQFINDINFO);
+_exports_SEQFINDINFO_class_0->Inherit(_exports_SEQFINDINFO_class);
+#if (SWIG_V8_VERSION < 0x0704)
+_exports_SEQFINDINFO_class_0->SetHiddenPrototype(true);
+v8::Local<v8::Object> _exports_SEQFINDINFO_obj = _exports_SEQFINDINFO_class_0->GetFunction();
+#else
+v8::Local<v8::Object> _exports_SEQFINDINFO_obj = _exports_SEQFINDINFO_class_0->GetFunction(context).ToLocalChecked();
+#endif
+/* Class: SEQRECORD429 (_exports_SEQRECORD429) */
+SWIGV8_FUNCTION_TEMPLATE _exports_SEQRECORD429_class_0 = SWIGV8_CreateClassTemplate("SEQRECORD429");
+_exports_SEQRECORD429_class_0->SetCallHandler(_wrap_new_SEQRECORD429);
+_exports_SEQRECORD429_class_0->Inherit(_exports_SEQRECORD429_class);
+#if (SWIG_V8_VERSION < 0x0704)
+_exports_SEQRECORD429_class_0->SetHiddenPrototype(true);
+v8::Local<v8::Object> _exports_SEQRECORD429_obj = _exports_SEQRECORD429_class_0->GetFunction();
+#else
+v8::Local<v8::Object> _exports_SEQRECORD429_obj = _exports_SEQRECORD429_class_0->GetFunction(context).ToLocalChecked();
+#endif
+
 
   /* add static class functions and variables */
   SWIGV8_AddStaticFunction(exports_obj, "openCard", _wrap_openCard, context);
@@ -3171,6 +4347,8 @@ SWIGV8_AddStaticFunction(exports_obj, "closeCard", _wrap_closeCard, context);
 SWIGV8_AddStaticFunction(exports_obj, "openCardNum", _wrap_openCardNum, context);
 SWIGV8_AddStaticFunction(exports_obj, "buildSchedule", _wrap_buildSchedule, context);
 SWIGV8_AddStaticFunction(exports_obj, "buildSchedule3", _wrap_buildSchedule3, context);
+SWIGV8_AddStaticFunction(exports_obj, "filterDefault", _wrap_filterDefault, context);
+SWIGV8_AddStaticFunction(exports_obj, "filterSet", _wrap_filterSet, context);
 SWIGV8_AddStaticFunction(exports_obj, "BTICard_CardOpenStr", _wrap_BTICard_CardOpenStr, context);
 SWIGV8_AddStaticFunction(exports_obj, "BTICard_CoreOpen", _wrap_BTICard_CoreOpen, context);
 SWIGV8_AddStaticFunction(exports_obj, "BTICard_CardClose", _wrap_BTICard_CardClose, context);
@@ -3188,10 +4366,20 @@ SWIGV8_AddStaticFunction(exports_obj, "BTI429_MsgDataWr", _wrap_BTI429_MsgDataWr
 SWIGV8_AddStaticFunction(exports_obj, "BTI429_FldPutLabel", _wrap_BTI429_FldPutLabel, context);
 SWIGV8_AddStaticFunction(exports_obj, "BTI429_SchedBuild", _wrap_BTI429_SchedBuild, context);
 SWIGV8_AddStaticFunction(exports_obj, "BTI429_MsgDataRd", _wrap_BTI429_MsgDataRd, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTI429_BNRPutMant", _wrap_BTI429_BNRPutMant, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTI429_FilterDefault", _wrap_BTI429_FilterDefault, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTI429_FilterSet", _wrap_BTI429_FilterSet, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTICard_SeqConfig", _wrap_BTICard_SeqConfig, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTICard_SeqBlkRd", _wrap_BTICard_SeqBlkRd, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTICard_SeqFindInit", _wrap_BTICard_SeqFindInit, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTICard_SeqFindNext429", _wrap_BTICard_SeqFindNext429, context);
+SWIGV8_AddStaticFunction(exports_obj, "BTICard_SeqFindCheckVersion", _wrap_BTICard_SeqFindCheckVersion, context);
 
 
   /* register classes */
-  
+  SWIGV8_MAYBE_CHECK(exports_obj->Set(context, SWIGV8_SYMBOL_NEW("SEQFINDINFO"), _exports_SEQFINDINFO_obj));
+SWIGV8_MAYBE_CHECK(exports_obj->Set(context, SWIGV8_SYMBOL_NEW("SEQRECORD429"), _exports_SEQRECORD429_obj));
+
 
   /* create and register namespace objects */
   

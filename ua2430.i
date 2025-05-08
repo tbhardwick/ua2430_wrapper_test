@@ -75,11 +75,36 @@ int buildSchedule3(void *coreHandle, int channum,
     
     return BTI429_SchedBuild(3, msgarray, minarray, maxarray, channum, (HCORE)coreHandle);
 }
+unsigned long filterDefault(unsigned long config, int channum, void *coreHandle) {
+    return BTI429_FilterDefault(config, channum, (HCORE)coreHandle);
+}
+unsigned long filterSet(unsigned long config, int labelval, int sdimask, int channum, void *coreHandle) {
+    return BTI429_FilterSet(config, labelval, sdimask, channum, (HCORE)coreHandle);
+}
 %}
 
 // Typedefs for handles
 typedef void * HCARD;
 typedef void * HCORE;
+
+// Structs needed for BTICard_SeqFindInit and BTICard_SeqFindNext429
+typedef struct {
+    unsigned short *pRecFirst;
+    unsigned short *pRecNext;
+    unsigned short *pRecLast;
+} SEQFINDINFO;
+typedef SEQFINDINFO * LPSEQFINDINFO;
+
+typedef struct {
+    unsigned short type;
+    unsigned short count;
+    unsigned long timestamp;
+    unsigned short activity;
+    unsigned short decgap;
+    unsigned long data;
+    unsigned long timestamph;
+} SEQRECORD429;
+typedef SEQRECORD429 * LPSEQRECORD429;
 
 // BTICard API
 int BTICard_CardOpenStr(HCARD *lpHandle, const char *cardstr);
@@ -100,4 +125,14 @@ int BTI429_ListDataWr(unsigned long value, unsigned long listaddr, HCORE handlev
 void BTI429_MsgDataWr(unsigned long value, unsigned long msgaddr, HCORE handleval);
 unsigned long BTI429_FldPutLabel(unsigned long msgval, unsigned short label);
 int BTI429_SchedBuild(int nummsgs, unsigned long *msgaddr, int *minperiod, int *maxperiod, int channum, HCORE handleval);
-unsigned long BTI429_MsgDataRd(unsigned long msgaddr, HCORE handleval); 
+unsigned long BTI429_MsgDataRd(unsigned long msgaddr, HCORE handleval);
+unsigned long BTI429_BNRPutMant(unsigned long msg, unsigned long value, unsigned short sigbit, unsigned short twos);
+unsigned long BTI429_FilterDefault(unsigned long configval, int channum, HCORE handleval);
+unsigned long BTI429_FilterSet(unsigned long configval, int labelval, int sdimask, int channum, HCORE handleval);
+
+// BTICard Sequential Monitor API
+int BTICard_SeqConfig(unsigned long configval, HCORE handleval);
+unsigned long BTICard_SeqBlkRd(unsigned short *buf, unsigned long bufcount, unsigned long *blkcnt, HCORE handleval);
+int BTICard_SeqFindInit(unsigned short *seqbuf, unsigned long seqbufsize, LPSEQFINDINFO sfinfo);
+int BTICard_SeqFindNext429(LPSEQRECORD429 *pRecord, LPSEQFINDINFO sfinfo);
+int BTICard_SeqFindCheckVersion(unsigned short *pRecord, unsigned short version); 
